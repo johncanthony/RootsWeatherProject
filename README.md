@@ -1,3 +1,3 @@
 # RootsWeatherProject
 
-![Architecture Diagram](docs/images/RootsWeatherArchitecture.png)
+![Architecture Diagram](docs/images/RWDArchitecture.png)
