@@ -1,0 +1,71 @@
+from fastapi import APIRouter, HTTPException
+from ManagerAPI.api.managers.job_manager import JobManager
+from ManagerAPI.api.models.managedJob import ManagedJobModel
+from ManagerAPI.api.managers.state_manager import StateManager
+from ManagerAPI.api.managers.connection_manager import RedisConnectionConfig
+import logging
+
+log = logging.getLogger('uvicorn')
+
+jobRouter = APIRouter()
+jobManager = JobManager(RedisConnectionConfig(), StateManager())
+
+
+@jobRouter.get('/jobs', tags=['jobs'])
+async def get_jobs():
+    queued_jobs = {}
+
+    for queue in jobManager.stateManager.states():
+        log.debug(f'Getting jobs from queue {queue} - {jobManager.stateManager[queue]}')
+        queued_jobs[jobManager.stateManager[queue]] = jobManager.get_jobs_from_state(queue=queue)
+
+    return queued_jobs
+
+
+@jobRouter.get('/job/id/{job_id}', tags=['jobs'])
+async def get_job(job_id):
+
+    job = jobManager.get_job(job_id=job_id)
+    if job is None:
+        log.error(f'Job {job_id} not found')
+        raise HTTPException(status_code=404, detail='Job not found')
+
+    return job.model_dump()
+
+
+@jobRouter.post('/job', tags=['jobs'])
+async def update_job(job: ManagedJobModel):
+
+    log.info(f'Updating job: {job.model_dump()}')
+
+    if not jobManager.update_job(job=job):
+        log.error(f'Failed to update job {job.job_id}')
+        raise HTTPException(status_code=500, detail='Failed to update job')
+
+    return job.model_dump()
+
+
+@jobRouter.delete('/job/id/{job_id}', tags=['jobs'])
+async def delete_job(job_id):
+
+    if not jobManager.get_job(job_id=job_id):
+        log.error(f'Job {job_id} not found')
+        raise HTTPException(status_code=404, detail='Job not found')
+
+    if not jobManager.delete_job(job_id=job_id):
+        log.error(f'Failed to delete job {job_id}')
+        raise HTTPException(status_code=500, detail='Failed to delete job from Redis')
+
+    return {'Deleted': job_id}
+
+
+@jobRouter.get('/job/queue/{queue}', tags=['jobs'])
+async def get_jobs_from_queue(queue):
+
+    job_id = jobManager.get_job_from_queue(queue=queue)
+
+    if job_id is None:
+        log.error(f'No jobs in queue {queue}')
+        raise HTTPException(status_code=404, detail='No jobs in queue')
+
+    return {'job_id': job_id}
