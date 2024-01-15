@@ -17,6 +17,7 @@ class ManagedJobModel(BaseModel):
     video_urn: Union[str, None] = ''
     img_resolution: str
     yt_video_id: Union[str, None] = ''
+    region: str
 
     class Config:
         orm_mode = True

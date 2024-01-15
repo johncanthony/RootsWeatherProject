@@ -4,7 +4,7 @@ setup(
     name='RootsWeatherProject',
     version='1.0.0',
     packages=find_packages(),
-    install_requires=['pytest', 'fastapi', 'pydantic', 'uvicorn', 'httpx', 'redis'],
+    install_requires=['pytest', 'fastapi', 'pydantic', 'uvicorn', 'httpx', 'redis', 'requests', 'beautifulsoup4', 'bs4'],
     author='John Anthony',
     description='A package holding microservices to create video from compiled weather image data',
     url='https://github.com/your_username/RootsWeatherProject',
@@ -15,6 +15,6 @@ setup(
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
-        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
     ],
 )

@@ -68,4 +68,4 @@ async def get_jobs_from_queue(queue):
         log.error(f'No jobs in queue {queue}')
         raise HTTPException(status_code=404, detail='No jobs in queue')
 
-    return {'job_id': job_id}
+    return {queue: job_id}

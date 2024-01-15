@@ -91,6 +91,9 @@ class JobManager:
             job_id = self.redis.lpop(self.stateManager[queue])
         except exceptions.ConnectionError:
             return None
+        
+        if not job_id:
+            return None
 
         return self.get_job(job_id)
 
