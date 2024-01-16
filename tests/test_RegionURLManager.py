@@ -24,7 +24,6 @@ def test_valid_region():
                ("north_mississippi_valley", True),
                ("pac_west", True), ("conus", True),
                ("invalid_region", False)]
-    
+
     for region in regions:
         assert manager.valid_region(region[0]) is region[1]
-
