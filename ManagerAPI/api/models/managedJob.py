@@ -9,7 +9,7 @@ class ManagedJobModel(BaseModel):
     job_id: Union[str, None] = str(uuid4())
     job_status: Union[str, None] = "new"
     job_start_time: Union[int, None] = int(time())
-    job_end_time: Union[int, None] = ''
+    job_end_time: Union[int, None] = -1
     job_error: Union[str, None] = ''
     img_date: str
     image_links: Union[str, None] = ''

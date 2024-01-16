@@ -56,8 +56,9 @@ def run():
     log.debug(f'Found {len(img_urls)} images for date: {new_job.img_date} and resolution: {new_job.img_resolution}')
 
     if len(img_urls) == 0:
-        jobHandler.error_job(new_job, f'No images found for date: {new_job.img_date} and resolution: {new_job.img_resolution}')
         log.error(f'No images found for date: {new_job.img_date} and resolution: {new_job.img_resolution}')
+        log.debug(f'Updating job {new_job.model_dump()} with error')
+        jobHandler.error_job(new_job, f'No images found for date: {new_job.img_date} and resolution: {new_job.img_resolution}')
         return
 
     new_job.image_links = ",".join(img_urls)
