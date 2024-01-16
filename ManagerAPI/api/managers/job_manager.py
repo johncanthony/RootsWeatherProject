@@ -33,6 +33,7 @@ class JobManager:
             return None
 
         if not job:
+            log.error(f'Job {job_id} not found')
             return None
 
         log.debug(f'Fetched Job {job_id} : {job}')
@@ -91,7 +92,7 @@ class JobManager:
             job_id = self.redis.lpop(self.stateManager[queue])
         except exceptions.ConnectionError:
             return None
-        
+
         if not job_id:
             return None
 
