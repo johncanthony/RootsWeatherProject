@@ -7,6 +7,7 @@ from dataclasses import dataclass
 class LogHandler:
 
     service_name: str = 'running'
+    dir: str = ''
     level: str = 'INFO'
 
     def bootstrap(self):
@@ -16,7 +17,7 @@ class LogHandler:
         formatter = log.Formatter(
             '%(asctime)s [%(levelname)s] [%(module)s] %(message)s',
             '%b %d %H:%M:%S')
-        handler = TimedRotatingFileHandler(f'logs/{self.service_name}-service.log', when='midnight', interval=1, backupCount=5)
+        handler = TimedRotatingFileHandler(f'{self.dir}{self.service_name}-service.log', when='midnight', interval=1, backupCount=5)
 
         handler.setFormatter(formatter)
         logger.addHandler(handler)

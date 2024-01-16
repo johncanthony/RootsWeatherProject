@@ -97,7 +97,7 @@ def run():
 
 if __name__ == "__main__":
 
-    LogHandler(service_name="imageGrabber", level="INFO").bootstrap()
+    LogHandler(service_name="imageGrabber", dir='log/', level="INFO").bootstrap()
 
     while True:
         sleep(5)
