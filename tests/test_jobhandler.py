@@ -34,7 +34,7 @@ def test_fetch_job_fields(job_handler):
                 "job_id": "efb7f53b-e5a1-4c30-9f45-4b6c116a36ca",
                 "job_status": "new",
                 "job_start_time": 1705313815,
-                "job_end_time": "",
+                "job_end_time": -1,
                 "job_error": "",
                 "img_date": "2024-01-12",
                 "image_links": "",
@@ -63,7 +63,7 @@ def test_update_job(job_handler):
                 "job_id": "efb7f53b-e5a1-4c30-9f45-4b6c116a36ca",
                 "job_status": "new",
                 "job_start_time": 1705313815,
-                "job_end_time": "",
+                "job_end_time": -1,
                 "job_error": "",
                 "img_date": "2024-01-12",
                 "image_links": "",
@@ -76,7 +76,7 @@ def test_update_job(job_handler):
             }
 
         mock_job = ManagedJobModel(job_id="efb7f53b-e5a1-4c30-9f45-4b6c116a36ca", job_status="new", job_start_time=1705313815, 
-                                   job_end_time="", job_error="", img_date="2024-01-12", image_links="", gif_urn="", video_urn="",
+                                   job_end_time=-1, job_error="", img_date="2024-01-12", image_links="", gif_urn="", video_urn="",
                                    img_resolution="1250x750", yt_video_id="", region="CONUS")
         job_push = job_handler.update_job(mock_job)
 
