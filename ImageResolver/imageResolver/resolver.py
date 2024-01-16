@@ -1,27 +1,26 @@
 from JobHandler.jobHandler import JobHandler
+from JobHandler.managers.RegionURLManager import RegionURLManager
+from LogHandler.logHandler import LogHandler
+from ManagerAPI.api.models.managedJob import ManagedJobModel
+
 import requests
 from time import sleep
 from bs4 import BeautifulSoup
 import logging as log
-from datetime import date
-
-
-log.basicConfig(filename=f'logs/ImageResolver-service.{date.today()}.log', level=log.INFO, format='%(asctime)s %(levelname)s %(message)s')
 
 '''
 Pull the image urls matching the jobs date and resolution from the GOES16 ABI CONUS GEOCOLOR directory
 '''
 
 
-def fetch_NOAA_GOES_image_data(jobHandler, job):
+def fetch_NOAA_GOES_image_data(jobHandler: JobHandler, job: ManagedJobModel, request_base_url: str):
 
-    BASE_URL = "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/GEOCOLOR/"
     matched_img_links = []
 
-    log.debug(f'Fetching image for date: {job.img_date} and resolution: {job.img_resolution} from {BASE_URL}')
+    log.debug(f'Fetching image for date: {job.img_date} and resolution: {job.img_resolution} from {request_base_url}')
 
     try:
-        raw_data = requests.get(BASE_URL)
+        raw_data = requests.get(request_base_url, timeout=10)
     except requests.exceptions.ConnectionError as err:
         jobHandler.error_job(job, f'Unable to fetch image data: {err}')
         log.error(f'Unable to fetch image data: {err}')
@@ -53,7 +52,7 @@ def run():
         log.error(f'Failed to fetch job {new_job.job_id}')
         return
 
-    img_urls = fetch_NOAA_GOES_image_data(jobHandler, new_job)
+    img_urls = fetch_NOAA_GOES_image_data(jobHandler=jobHandler, job=new_job, request_base_url=RegionURLManager()[new_job.region])
     log.debug(f'Found {len(img_urls)} images for date: {new_job.img_date} and resolution: {new_job.img_resolution}')
 
     if len(img_urls) == 0:
@@ -70,6 +69,10 @@ def run():
 
 
 if __name__ == "__main__":
+
+    LogHandler(service_name='resolver', level="DEBUG").bootstrap()
+    log.info('Starting resolver service')
+
     while True:
         sleep(5)
         run()

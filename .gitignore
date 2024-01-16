@@ -121,6 +121,7 @@ celerybeat.pid
 
 # Environments
 .rwp
+.rpw
 .env
 .venv
 env/

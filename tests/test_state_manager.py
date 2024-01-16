@@ -19,5 +19,11 @@ def test_valid_state():
 def test_states():
     state_manager = StateManager()
     print(state_manager.states())
-    assert state_manager.states() == {'new': 'jobs:NEW', 'imgresolved': 'jobs:IMGRESOLVED', 'grabbed': 'jobs:GRABBED',
-                                      'packed': 'jobs:PACKED', 'uploaded': 'jobs:UPLOADED', 'error': 'jobs:ERROR'}
+    assert state_manager.states() == {
+                                      'new': 'jobs:NEW',
+                                      'imgresolved': 'jobs:IMGRESOLVED',
+                                      'grabbed': 'jobs:GRABBED',
+                                      'packed': 'jobs:PACKED',
+                                      'uploaded': 'jobs:UPLOADED',
+                                      'error': 'jobs:ERROR'
+                                      }
