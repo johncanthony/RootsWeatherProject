@@ -65,6 +65,7 @@ class JobManager:
         Check if queue is valid
         '''
         if not self.stateManager.valid_state(queue):
+            log.error(f'Invalid queue {queue}')
             return False
 
         '''
