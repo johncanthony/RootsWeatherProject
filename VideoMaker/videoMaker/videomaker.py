@@ -18,6 +18,7 @@ def create_video(job: ManagedJobModel):
         job.job_error += f'No images found for job: {job.job_id} ,'
         return
 
+    log.debug(f'Job resolution: {job_resolution[0]}x{job_resolution[1]}')
     if job_resolution[0] == job_resolution[1]:
         VideoManager(video_name=str(job.job_id)).build()
     else:

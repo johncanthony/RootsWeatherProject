@@ -8,7 +8,11 @@ import logging as log
 class VideoBase:
 
     video_name: str = "output"
-    image_directory: str = f'/images/{video_name}'
+
+    @property
+    def image_directory(self):
+        return f'/images/{self.video_name}'
+    
     input_glob: str = f'{image_directory}/*.jpg'
     output_file: str = f'{image_directory}/{video_name}.mp4'
     video_bitrate: str = "5000k"
@@ -38,7 +42,6 @@ class ShortsVideoManager(VideoBase):
     vcodec: str = "libx264"
     acodec: str = "aac"
     audio_bitrate: str = "192k"
-    filters: str = "scale=w=1080:h=1920,setsar=1"
 
     def build(self):
         log.info(f'[FFMPEG] Creating shorts video for job: {self.video_name}')
@@ -46,7 +49,8 @@ class ShortsVideoManager(VideoBase):
             ffmpeg
             .input(self.input_glob, pattern_type='glob', framerate=self.framerate)
             .input(self.audiofile)
-            .filter(self.filters)
+            .filter("scale", 1080, 1920)
+            .filter("setsar", 1)
             .output(self.output_file, vcodec=self.vcodec, acodec=self.acodec, audio_bitrate=self.audio_bitrate, video_bitrate=self.video_bitrate)
             .run()
         )
@@ -63,14 +67,13 @@ class VideoManager(VideoBase):
 
     framerate: int = 15
     vcodec: str = "libx264"
-    filters: str = "scale=w=1920:h=1080"
 
     def build(self):
         log.info(f'[FFMPEG] Creating video for job: {self.video_name}')
         (
             ffmpeg
             .input(self.input_glob, pattern_type='glob', framerate=self.framerate)
-            .filter(self.filters)
+            .filter("scale", 1920, 1080)
             .output(self.output_file, vcodec=self.vcodec, video_bitrate=self.video_bitrate)
             .run()
         )
