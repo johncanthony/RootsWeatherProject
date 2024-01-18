@@ -1,14 +1,14 @@
 from uuid import uuid4
 from datetime import datetime
 from time import time
-from pydantic import BaseModel
-from typing import Union
+from pydantic import BaseModel, Field
+from typing import Union, Optional
 
 
 class ManagedJobModel(BaseModel):
-    job_id: Union[str, None] = str(uuid4())
+    job_id: Optional[str] = Field(default_factory=lambda: str(uuid4()))
     job_status: Union[str, None] = "new"
-    job_start_time: Union[int, None] = int(time())
+    job_start_time: Optional[int] = Field(default_factory=lambda: int(time()))
     job_end_time: Union[int, None] = -1
     job_error: Union[str, None] = ''
     img_date: str
