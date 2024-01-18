@@ -19,7 +19,7 @@ def create_video(job: ManagedJobModel):
         return
 
     log.debug(f'Job resolution: {job_resolution[0]}x{job_resolution[1]}')
-    if job_resolution[0] == job_resolution[1]:
+    if job_resolution[0] != job_resolution[1]:
         VideoManager(video_name=str(job.job_id)).build()
     else:
         ShortsVideoManager(video_name=str(job.job_id)).build()
