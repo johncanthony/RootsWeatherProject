@@ -10,7 +10,7 @@ import logging as log
 def create_video(job: ManagedJobModel):
 
     log.info(f'Creating video for job: {job.job_id}')
-    job_resolution = job.job_resolution.split("x")
+    job_resolution = job.img_resolution.split("x")
 
     if not VideoBase(video_name=str(job.job_id)).input_directory_exists() or not VideoBase(video_name=str(job.job_id)).input_directory_exists():
         log.error(f'No images found for job: {job.job_id}')
@@ -19,9 +19,9 @@ def create_video(job: ManagedJobModel):
         return
 
     if job_resolution[0] == job_resolution[1]:
-        VideoManager(str(job.job_id)).build()
+        VideoManager(video_name=str(job.job_id)).build()
     else:
-        ShortsVideoManager(str(job.job_id)).build()
+        ShortsVideoManager(video_name=str(job.job_id)).build()
 
     return
 
@@ -55,7 +55,7 @@ def run():
 
 if __name__ == "__main__":
 
-    LogHandler(service_name="videoMaker", log_level="DEBUG", dir="log").bootstrap()
+    LogHandler(service_name="videoMaker", level="DEBUG", dir="log/").bootstrap()
     log.info("Starting VideoMaker service")
 
     while True:

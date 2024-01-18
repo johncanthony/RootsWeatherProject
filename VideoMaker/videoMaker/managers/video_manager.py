@@ -14,9 +14,11 @@ class VideoBase:
     video_bitrate: str = "5000k"
 
     def input_directory_exists(self):
+        log.info(f'[FFMPEG] Checking for input directory: {self.image_directory}')
         return False if not os.path.exists(self.image_directory) else True
 
     def input_directory_not_empty(self):
+        log.info(f'[FFMPEG] Checking for images in input directory: {self.image_directory} - file count: {len(os.listdir(self.image_directory))}')
         return False if len(os.listdir(self.image_directory)) == 0 else True
 
 
