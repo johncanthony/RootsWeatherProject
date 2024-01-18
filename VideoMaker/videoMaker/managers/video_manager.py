@@ -43,7 +43,7 @@ ffmpeg -framerate 15 -pattern_type glob -i "*_GOES16-*-GEOCOLOR-*.jpg" -i space_
 class ShortsVideoManager(VideoBase):
 
     framerate: int = 15
-    audiofile: str = "space_walk_short.mp3"
+    audiofile: str = "./audio/space_walk_short.mp3"
     vcodec: str = "libx264"
     acodec: str = "aac"
     audio_bitrate: str = "192k"
@@ -52,7 +52,7 @@ class ShortsVideoManager(VideoBase):
         log.info(f'[FFMPEG] Creating shorts video for job: {self.video_name}')
 
         input_video = ffmpeg.input(self.input_glob, pattern_type='glob', framerate=self.framerate).filter("scale", 1080, 1920).filter("setsar", 1)
-        input_audio = input_video.audio(self.audiofile)
+        input_audio = ffmpeg.input(self.audiofile)
 
         (
             ffmpeg
