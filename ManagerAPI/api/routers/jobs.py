@@ -32,7 +32,10 @@ async def get_job(job_id):
 
     return job.model_dump()
 
-
+'''
+Currently the job instance does not cleanup which is leading to re-used values in the object (problematic for creating new jobs)
+This may be as simple as deleteing the object before the return statement
+'''
 @jobRouter.post('/job', tags=['jobs'])
 async def update_job(job: ManagedJobModel):
 

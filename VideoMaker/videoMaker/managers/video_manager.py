@@ -18,7 +18,9 @@ class VideoBase:
     def output_file(self):
         return f'{self.image_directory}/{self.video_name}.mp4'
 
-    input_glob: str = f'{image_directory}/*.jpg'
+    @property
+    def input_glob(self):
+        return f'{self.image_directory}/*.jpg'
 
     def input_directory_exists(self):
         log.info(f'[FFMPEG] Checking for input directory: {self.image_directory}')
@@ -41,20 +43,20 @@ ffmpeg -framerate 15 -pattern_type glob -i "*_GOES16-*-GEOCOLOR-*.jpg" -i space_
 class ShortsVideoManager(VideoBase):
 
     framerate: int = 15
-    audiofile: str = ""
+    audiofile: str = "space_walk_short.mp3"
     vcodec: str = "libx264"
     acodec: str = "aac"
     audio_bitrate: str = "192k"
 
     def build(self):
         log.info(f'[FFMPEG] Creating shorts video for job: {self.video_name}')
+
+        input_video = ffmpeg.input(self.input_glob, pattern_type='glob', framerate=self.framerate).filter("scale", 1080, 1920).filter("setsar", 1)
+        input_audio = input_video.audio(self.audiofile)
+
         (
             ffmpeg
-            .input(self.input_glob, pattern_type='glob', framerate=self.framerate)
-            .input(self.audiofile)
-            .filter("scale", 1080, 1920)
-            .filter("setsar", 1)
-            .output(self.output_file, vcodec=self.vcodec, acodec=self.acodec, audio_bitrate=self.audio_bitrate, video_bitrate=self.video_bitrate)
+            .output(input_video, input_audio, self.output_file, vcodec=self.vcodec, acodec=self.acodec, audio_bitrate=self.audio_bitrate, video_bitrate=self.video_bitrate)
             .run()
         )
 
