@@ -22,7 +22,8 @@ class VideoBase:
 
 '''
 Youtube Shorts video ffmpeg command example:
-ffmpeg -framerate 15 -pattern_type glob -i "*_GOES16-*-GEOCOLOR-*.jpg" -i space_walk_short.mp3 -map 0:v -map 1:a -c:v libx264 -c:a aac -b:a 192k -r 24 -vf "scale=w=1080:h=1920,setsar=1" -af "afade=t=out:st=280:d=3" output.mp4
+ffmpeg -framerate 15 -pattern_type glob -i "*_GOES16-*-GEOCOLOR-*.jpg" -i space_walk_short.mp3 -map 0:v -map 1:a -c:v libx264 -c:a aac
+  -b:a 192k -r 24 -vf "scale=w=1080:h=1920,setsar=1" -af "afade=t=out:st=280:d=3" output.mp4
 
 '''
 
