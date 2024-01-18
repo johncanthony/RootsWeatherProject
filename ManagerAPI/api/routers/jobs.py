@@ -45,7 +45,10 @@ async def update_job(job: ManagedJobModel):
         log.error(f'Failed to update job {job.job_id}')
         raise HTTPException(status_code=500, detail='Failed to update job')
 
-    return job.model_dump()
+    job_json = job.model_dump()
+    del job
+    
+    return job_json
 
 
 @jobRouter.delete('/job/id/{job_id}', tags=['jobs'])
