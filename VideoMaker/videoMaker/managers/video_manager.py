@@ -8,14 +8,17 @@ import logging as log
 class VideoBase:
 
     video_name: str = "output"
+    video_bitrate: str = "5000k"
 
     @property
     def image_directory(self):
-        return f'/images/{self.video_name}'
-    
+        return f'./images/{self.video_name}'
+
+    @property
+    def output_file(self):
+        return f'{self.image_directory}/{self.video_name}.mp4'
+
     input_glob: str = f'{image_directory}/*.jpg'
-    output_file: str = f'{image_directory}/{video_name}.mp4'
-    video_bitrate: str = "5000k"
 
     def input_directory_exists(self):
         log.info(f'[FFMPEG] Checking for input directory: {self.image_directory}')
