@@ -1,6 +1,8 @@
 from redis import StrictRedis, exceptions
 from ManagerAPI.api.models.managedJob import ManagedJobModel
 import logging
+import pathlib
+import shutil
 
 log = logging.getLogger('uvicorn')
 
@@ -99,7 +101,18 @@ class JobManager:
 
         return self.get_job(job_id)
 
-    def delete_job(self, job_id: str):
+    def delete_job(self, job_id: str, force: bool = False):
+
+        job = self.get_job(job_id=job_id)
+
+        file_path = pathlib.Path(job.video_urn).parent
+
+        if not force:
+            if file_path.exists():
+                shutil.rmtree(file_path)
+            else:
+                log.error(f'Job {job_id} data not found on disk')
+                return False
 
         '''
         Add block to delete associated job files from disk

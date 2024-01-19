@@ -47,13 +47,13 @@ async def update_job(job: ManagedJobModel):
 
 
 @jobRouter.delete('/job/id/{job_id}', tags=['jobs'])
-async def delete_job(job_id):
+async def delete_job(job_id, force: bool = False):
 
     if not jobManager.get_job(job_id=job_id):
         log.error(f'Job {job_id} not found')
         raise HTTPException(status_code=404, detail='Job not found')
 
-    if not jobManager.delete_job(job_id=job_id):
+    if not jobManager.delete_job(job_id=job_id, force=force):
         log.error(f'Failed to delete job {job_id}')
         raise HTTPException(status_code=500, detail='Failed to delete job from Redis')
 
