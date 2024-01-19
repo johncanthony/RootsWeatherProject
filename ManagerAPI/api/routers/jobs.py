@@ -97,7 +97,7 @@ async def get_job_video(job_id):
         log.error(f'Job {job_id} errored before video creation')
         raise HTTPException(status_code=404, detail='Job errored before video creation')
 
-    if job.job_status != "packed":
+    if job.job_status not in ["packed", "uploaded", "completed"]:
         log.error(f'Job {job_id} video not packed')
         raise HTTPException(status_code=404, detail='Video not created yet')
 

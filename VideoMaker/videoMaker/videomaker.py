@@ -24,6 +24,9 @@ def create_video(job: ManagedJobModel):
     else:
         ShortsVideoManager(video_name=str(job.job_id)).build()
 
+    job.job_status = "packed"
+    job.video_urn = VideoBase(video_name=str(job.job_id)).output_file
+
     return
 
 
@@ -48,7 +51,6 @@ def run():
         log.error(f'Updated job {new_job.job_id} with error')
         return
 
-    new_job.job_status = "packed"
     jobHandler.update_job(new_job)
 
     return
