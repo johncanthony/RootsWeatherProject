@@ -5,7 +5,7 @@ setup(
     version='1.0.0',
     packages=find_packages(),
     install_requires=['pytest', 'fastapi', 'pydantic', 'uvicorn', 'httpx', 'redis', 'requests',
-                      'beautifulsoup4', 'bs4', 'setuptools', 'ffmpeg-python'],
+                      'beautifulsoup4', 'bs4', 'setuptools', 'ffmpeg-python', 'google_auth_oauthlib'],
     author='John Anthony',
     description='A package holding microservices to create video from compiled weather image data',
     url='https://github.com/your_username/RootsWeatherProject',
