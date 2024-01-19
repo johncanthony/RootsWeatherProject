@@ -62,7 +62,7 @@ class ShortsVideoManager(VideoBase):
                     acodec=self.acodec,
                     audio_bitrate=self.audio_bitrate,
                     video_bitrate=self.video_bitrate,
-                    shortest=None
+                    shortest=None)
             .run()
         )
 
