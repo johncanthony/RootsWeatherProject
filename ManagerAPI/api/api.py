@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from ManagerAPI.api.routers import jobs
+from ManagerAPI.api.routers import jobs, auth
 
 managerAPI = FastAPI()
 
@@ -12,3 +12,4 @@ async def health():
 Include additional routers
 '''
 managerAPI.include_router(jobs.jobRouter)
+managerAPI.include_router(auth.authRouter)
