@@ -56,13 +56,13 @@ class ShortsVideoManager(VideoBase):
 
         (
             ffmpeg
-            .output(input_video, 
-                    input_audio, self.output_file,
+            .output(input_audio,
+                    input_video, self.output_file,
                     vcodec=self.vcodec,
                     acodec=self.acodec,
                     audio_bitrate=self.audio_bitrate,
                     video_bitrate=self.video_bitrate,
-                    shortest=1)
+                    shortest=None
             .run()
         )
 

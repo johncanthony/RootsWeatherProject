@@ -4,11 +4,12 @@ from JobHandler.managers.RegionURLManager import RegionURLManager
 def test_getitem():
     manager = RegionURLManager()
 
-    regionMap = [("alaska", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/ak/GEOCOLOR/"),
-                 ("central_alaska", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cak/GEOCOLOR/"),
+    regionMap = [("alaska", "https://cdn.star.nesdis.noaa.gov/GOES18/ABI/SECTOR/ak/GEOCOLOR/"),
+                 ("central_alaska", "https://cdn.star.nesdis.noaa.gov/GOES18/ABI/SECTOR/cak/GEOCOLOR/"),
                  ("south_mississippi_valley", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/smv/GEOCOLOR/"),
                  ("north_mississippi_valley", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/umv/GEOCOLOR/"),
-                 ("pac_west", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/wus/GEOCOLOR/"),
+                 ("pac_west", "https://cdn.star.nesdis.noaa.gov/GOES18/ABI/SECTOR/wus/GEOCOLOR/"),
+                 ("mexico", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/mex/GEOCOLOR/"),
                  ("conus", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/GEOCOLOR/")]
 
     for region in regionMap:
