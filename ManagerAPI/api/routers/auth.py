@@ -1,6 +1,7 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Request
 import logging
-from google_auth_oauthlib.flow import InstalledAppFlow
+import json
+from fastapi_sso.sso.google import GoogleSSO
 
 log = logging.getLogger('uvicorn')
 authRouter = APIRouter()
@@ -11,21 +12,28 @@ SCOPES = ['https://www.googleapis.com/auth/youtube.upload']
 API_SERVICE_NAME = 'youtube'
 API_VERSION = 'v3'
 
+with open(CLIENT_SECRETS_FILE, 'r') as f:
+    creds = json.load(f)
 
-@authRouter.get('/auth', tags=['auth'])
-async def auth():
-    flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRETS_FILE, SCOPES)
-    flow.redirect_uri = InstalledAppFlow.DEFAULT_AUTH_REDIRECT_URI
-    auth_url, _ = flow.authorization_url(prompt='consent')
-    return {'auth_url': auth_url}
+sso = GoogleSSO(
+    client_id=creds['web']['client_id'],
+    client_secret=creds['web']['client_secret'],
+    redirect_uri="https://mroots.io/callback",
+    allow_insecure_http=True,
+    scope=SCOPES,
+)
 
 
-@authRouter.get('/callback', tags=['auth'])
-async def callback(code: str):
-    flow = InstalledAppFlow.from_client_secrets_file(CLIENT_SECRETS_FILE, SCOPES)
-    flow.redirect_uri = InstalledAppFlow.DEFAULT_AUTH_REDIRECT_URI
-    flow.fetch_token(code=code)
-    credentials = flow.credentials
-    refresh_token = credentials.refresh_token
-    access_token = credentials.token
-    return {'refresh_token': refresh_token, 'access_token': access_token}
+@authRouter.get("/auth")
+async def auth_init():
+    """Initialize auth and redirect"""
+    with sso:
+        return await sso.get_login_redirect(params={"prompt": "consent", "access_type": "offline"})
+
+
+@authRouter.get("/auth/callback")
+async def auth_callback(request: Request):
+    """Verify login"""
+    with sso:
+        user = await sso.verify_and_process(request)
+    return user
