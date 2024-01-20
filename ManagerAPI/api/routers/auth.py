@@ -13,7 +13,7 @@ session = {}
 
 # Google API credentials
 CLIENT_SECRETS_FILE = os.getenv('CLIENT_SECRETS_FILE') or 'client_secrets.json'
-FLOW_BASE_URI = os.getenv('FLOW_BASE_URI') or 'https://localhost'
+FLOW_BASE_URI = os.getenv('FLOW_BASE_URI') or 'localhost'
 SCOPES = ['https://www.googleapis.com/auth/youtube.upload']
 
 
@@ -27,9 +27,9 @@ async def auth_init():
         scopes=SCOPES
     )
 
-    flow.redirect_uri = f'{FLOW_BASE_URI}/callback'
+    flow.redirect_uri = f'https://{FLOW_BASE_URI}/callback'
 
-    log.info('Fetching authorization url')
+    log.info(f'Fetching authorization url - {flow.redirect_uri}')
     authorization_url, state = flow.authorization_url(
         access_type='offline',
         include_granted_scopes='true'
