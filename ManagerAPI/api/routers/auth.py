@@ -19,6 +19,8 @@ API_VERSION = 'v3'
 
 @authRouter.get("/auth")
 async def auth_init():
+
+    log.info('Initializing auth')
     """Initialize auth and redirect"""
     flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
         CLIENT_SECRETS_FILE,
@@ -27,6 +29,7 @@ async def auth_init():
 
     flow.redirect_uri = 'https://mroots.io/callback'
 
+    log.info('Fetching authorization url')
     authorization_url, state = flow.authorization_url(
         access_type='offline',
         include_granted_scopes='true'
@@ -34,11 +37,15 @@ async def auth_init():
 
     session['state'] = state
 
+    log.info(f'Authorization URL: {authorization_url}')
+
     return RedirectResponse(authorization_url)
 
 
 @authRouter.get("/callback")
 async def auth_callback(request: Request):
+
+    log.info('Auth callback')
     """Verify login"""
     state = session['state']
 
