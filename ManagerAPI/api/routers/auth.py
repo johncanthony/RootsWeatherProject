@@ -1,10 +1,14 @@
 from fastapi import APIRouter, Request
+from fastapi.responses import RedirectResponse
 import logging
 import json
-from fastapi_sso.sso.google import GoogleSSO
+import google_auth_oauthlib.flow
+
 
 log = logging.getLogger('uvicorn')
 authRouter = APIRouter()
+
+session = {}
 
 # Google API credentials
 CLIENT_SECRETS_FILE = './creds/client_secrets.json'
@@ -12,28 +16,42 @@ SCOPES = ['https://www.googleapis.com/auth/youtube.upload']
 API_SERVICE_NAME = 'youtube'
 API_VERSION = 'v3'
 
-with open(CLIENT_SECRETS_FILE, 'r') as f:
-    creds = json.load(f)
-
-sso = GoogleSSO(
-    client_id=creds['web']['client_id'],
-    client_secret=creds['web']['client_secret'],
-    redirect_uri="https://mroots.io/callback",
-    allow_insecure_http=True,
-    scope=SCOPES,
-)
-
 
 @authRouter.get("/auth")
 async def auth_init():
     """Initialize auth and redirect"""
-    with sso:
-        return await sso.get_login_redirect(params={"prompt": "consent", "access_type": "offline"})
+    flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
+        CLIENT_SECRETS_FILE,
+        scopes=SCOPES
+    )
+
+    flow.redirect_uri = 'https://mroots.io/callback'
+
+    authorization_url, state = flow.authorization_url(
+        access_type='offline',
+        include_granted_scopes='true'
+    )
+
+    session['state'] = state
+
+    return RedirectResponse(authorization_url)
 
 
-@authRouter.get("/auth/callback")
+@authRouter.get("/callback")
 async def auth_callback(request: Request):
     """Verify login"""
-    with sso:
-        user = await sso.verify_and_process(request)
-    return user
+    state = session['state']
+
+    flow = google_auth_oauthlib.flow.Flow.from_client_secrets_file(
+        CLIENT_SECRETS_FILE,
+        scopes=SCOPES,
+        state=state
+    )
+
+    flow.redirect_uri = 'https://mroots.io/callback'
+    authorization_response = f'https://mroots.io/{request.url.path}'
+
+    flow.fetch_token(authorization_response=authorization_response)
+    credentials = flow.credentials
+
+    return {'credentials': f'{credentials.refresh_token}'}
