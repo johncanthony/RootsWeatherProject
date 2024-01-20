@@ -50,7 +50,7 @@ class YTAuthManager:
 
     def fetch_credentials(self):
 
-        params = { 
+        params = {
             "client_id": self.client_id,
             "client_secret": self.client_secret,
             "refresh_token": self.refresh_token,

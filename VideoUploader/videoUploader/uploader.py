@@ -17,8 +17,8 @@ def get_video_type(job: ManagedJobModel):
 
 
 def get_title(job: ManagedJobModel):
-    title_base = f'GOES-East {job.img_date} {job.region.replace('_',' ').title()} - 24 Hour Timelapse'
-    title_base_shorts = f'{job.region.replace("_"," ").title()} GOES {job.img_date} #weather'
+    title_base = f'GOES-East {job.img_date} {job.region.replace("_", " ").title()} - 24 Hour Timelapse'
+    title_base_shorts = f'{job.region.replace("_", " ").title()} GOES {job.img_date} #weather'
 
     if get_video_type(job) == "shorts":
         return title_base_shorts
@@ -29,7 +29,7 @@ def get_title(job: ManagedJobModel):
 def get_description():
     description = """24 Hour  Timelapse
 
-Processed and uploaded by the RootsWeather Project 
+Processed and uploaded by the RootsWeather Project
 
 https://github.com/johncanthony/RootsWeatherProject
 
@@ -47,7 +47,7 @@ def upload_video(job: ManagedJobModel):
                                     video_type=get_video_type(job=job),
                                     privacy_status="private",
                                     video_file=job.video_urn,
-                                    auth_manager=YTAuthManager().bootstrap()) 
+                                    auth_manager=YTAuthManager().bootstrap())
 
     video_id = ytVideoManager.upload_video()
     log.info(f'Uploaded video {video_id}')
