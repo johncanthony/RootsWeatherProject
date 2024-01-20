@@ -1,8 +1,9 @@
 from fastapi import APIRouter, Request
 from fastapi.responses import RedirectResponse
+from ManagerAPI.api.managers.connection_manager import AuthManager
 import logging
-import json
 import google_auth_oauthlib.flow
+import os
 
 
 log = logging.getLogger('uvicorn')
@@ -11,10 +12,9 @@ authRouter = APIRouter()
 session = {}
 
 # Google API credentials
-CLIENT_SECRETS_FILE = './creds/client_secrets.json'
+CLIENT_SECRETS_FILE = os.getenv('CLIENT_SECRETS_FILE') or 'client_secrets.json'
+FLOW_BASE_URI = os.getenv('FLOW_BASE_URI') or 'https://localhost'
 SCOPES = ['https://www.googleapis.com/auth/youtube.upload']
-API_SERVICE_NAME = 'youtube'
-API_VERSION = 'v3'
 
 
 @authRouter.get("/auth")
@@ -27,7 +27,7 @@ async def auth_init():
         scopes=SCOPES
     )
 
-    flow.redirect_uri = 'https://mroots.io/callback'
+    flow.redirect_uri = f'{FLOW_BASE_URI}/callback'
 
     log.info('Fetching authorization url')
     authorization_url, state = flow.authorization_url(
@@ -37,15 +37,13 @@ async def auth_init():
 
     session['state'] = state
 
-    log.info(f'Authorization URL: {authorization_url}')
-
     return RedirectResponse(authorization_url)
 
 
 @authRouter.get("/callback")
 async def auth_callback(request: Request):
 
-    log.info('Auth callback')
+    log.info('[Callback] Auth')
     """Verify login"""
     state = session['state']
 
@@ -55,10 +53,11 @@ async def auth_callback(request: Request):
         state=state
     )
 
-    flow.redirect_uri = 'https://mroots.io/callback'
-    authorization_response = f'https://mroots.io/{request.url.path}'
+    flow.redirect_uri = f'https://{FLOW_BASE_URI}/callback'
+    authorization_response = f'https://{FLOW_BASE_URI}{request.url.path}?{request.url.query}'
+    log.debug(f'[Callback] Authorization Response: {authorization_response}')
 
     flow.fetch_token(authorization_response=authorization_response)
     credentials = flow.credentials
 
-    return {'credentials': f'{credentials.refresh_token}'}
+    return AuthManager(refresh_token=credentials.refresh_token).store()
