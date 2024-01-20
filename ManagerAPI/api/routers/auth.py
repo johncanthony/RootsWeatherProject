@@ -61,3 +61,11 @@ async def auth_callback(request: Request):
     credentials = flow.credentials
 
     return AuthManager(refresh_token=credentials.refresh_token).store()
+
+
+@authRouter.get("/refresh_token")
+async def refresh_token():
+
+    log.info('Refreshing token')
+
+    return AuthManager().fetch()
