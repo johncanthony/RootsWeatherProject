@@ -70,11 +70,12 @@ def run():
         return
 
     new_job = jobHandler.fetch_job()
-    log.info(f'Fetched job {new_job.job_id}')
 
     if not new_job:
         log.error(f'Failed to fetch job {new_job.job_id}')
         return
+
+    log.info(f'Fetched job {new_job.job_id}')
 
     if not regionalURLManager.valid_region(new_job.region):
         jobHandler.error_job(new_job, f'Invalid region: {new_job.region}')

@@ -3,7 +3,7 @@ from redis import Redis
 
 
 @dataclass
-class RedisConnectionConfig():
+class RedisConnectionConfig:
     host: str = "redis.home"
     port: int = 6379
     db: int = 1
