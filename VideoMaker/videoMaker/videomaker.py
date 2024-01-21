@@ -56,7 +56,7 @@ def run():
     return
 
 
-if __name__ == "__main__":
+def launch():
 
     LogHandler(service_name="videoMaker").bootstrap()
     log.info("Starting VideoMaker service")
@@ -64,3 +64,8 @@ if __name__ == "__main__":
     while True:
         sleep(5)
         run()
+
+
+if __name__ == "__main__":
+
+    launch()

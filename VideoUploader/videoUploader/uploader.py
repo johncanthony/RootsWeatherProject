@@ -91,7 +91,7 @@ def run():
     jobHandler.update_job(job)
 
 
-if __name__ == "__main__":
+def launch():
 
     LogHandler(service_name="videoUploader").bootstrap()
     log.info('[Boot] Starting video uploader')
@@ -99,3 +99,8 @@ if __name__ == "__main__":
     while True:
         sleep(5)
         run()
+
+
+if __name__ == "__main__":
+
+    launch()
