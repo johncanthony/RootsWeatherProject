@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='RootsWeatherProject',
-    version='1.0.0',
+    version='1.0.1',
     packages=find_packages(),
     install_requires=['pytest', 'fastapi', 'pydantic', 'uvicorn', 'httpx', 'redis', 'requests',
                       'beautifulsoup4', 'bs4', 'setuptools', 'ffmpeg-python', 'google_auth_oauthlib',
