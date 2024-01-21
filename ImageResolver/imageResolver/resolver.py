@@ -25,6 +25,10 @@ def fetch_NOAA_GOES_image_data(jobHandler: JobHandler, job: ManagedJobModel, req
         jobHandler.error_job(job, f'Unable to fetch image data: {err}')
         log.error(f'Unable to fetch image data: {err}')
         return matched_img_links
+    except requests.exceptions.ReadTimeout as err:
+        jobHandler.error_job(job, f'Timed out fetching image data: {err}')
+        log.error(f'Timed out fetching image urls: {err}')
+        return matched_img_links
 
     log.debug('Parsing image data')
     soup = BeautifulSoup(raw_data.content, 'html.parser')

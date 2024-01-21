@@ -24,15 +24,16 @@ class YTAuthManager:
     def fetch_refresh_token(self):
 
         try:
-            refresh_token = requests.get(self.manager_url + "/refresh_token").json()
+            log.debug(f'[VideoAuthManager] fetching refresh token from {self.manager_url}/refresh_token')
+            refresh_token = requests.get(f'http://{self.manager_url}/refresh_token').json()
         except requests.exceptions.ConnectionError:
             return False
-
-        if refresh_token.status_code != 200:
+        except requests.exceptions.ReadTimeout:
             return False
 
         log.debug(f'[VideoAuthManager] fetched refresh token {refresh_token}')
-        self.refresh_token = refresh_token
+
+        self.refresh_token = refresh_token['refresh_token']
 
         return True
 
@@ -114,7 +115,7 @@ class YTVideoManager:
             ).execute()
 
         except HttpError as e:
-            log.error(f'An HTTP error {e.resp.status} occurred: {e.content}')
+            log.error(f'Video Upload error - {e.resp.status} occurred: {e.content}')
             return False
 
         return video['id'] if "id" in video else False

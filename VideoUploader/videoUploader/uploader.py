@@ -8,7 +8,7 @@ import logging as log
 
 def get_video_type(job: ManagedJobModel):
 
-    resolution = job.image_resolution.split("x")
+    resolution = job.img_resolution.split("x")
 
     if resolution[0] == resolution[1]:
         return "shorts"
@@ -42,14 +42,15 @@ Imagery credit to NOAA / NESDIS Center for Satellite Applications and Research.
 def upload_video(job: ManagedJobModel):
     log.debug(f'Uploading video for job: {job.job_id}')
 
+    ytAuthManager = YTAuthManager().bootstrap()
     ytVideoManager = YTVideoManager(title=get_title(job=job),
                                     description=get_description(),
                                     video_type=get_video_type(job=job),
                                     privacy_status="private",
                                     video_file=job.video_urn,
-                                    auth_manager=YTAuthManager().bootstrap())
+                                    auth_manager=ytAuthManager)
 
-    video_id = ytVideoManager.upload_video()
+    video_id = ytVideoManager.upload_video(ytAuthManager.fetch_credentials())
     log.info(f'Uploaded video {video_id}')
 
     if not video_id:
@@ -78,6 +79,7 @@ def run():
         return
 
     log.info(f'Processing job: {job.job_id}')
+    upload_video(job=job)
 
     if job.job_status == "error":
         log.error(f'Job {job.job_id} failed')
