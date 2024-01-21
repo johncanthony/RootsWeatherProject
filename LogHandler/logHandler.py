@@ -3,16 +3,15 @@ from logging.handlers import TimedRotatingFileHandler
 from dataclasses import dataclass
 import os
 
-LOG_DIR = os.getenv('RWP_LOG_DIR', './')
-LOG_LEVEL = os.getenv('RWP_LOG_LEVEL', 'INFO')
-
 
 @dataclass
 class LogHandler:
 
     service_name: str = 'running'
-    dir: str = LOG_DIR
-    level: str = LOG_LEVEL
+
+    def __post_init__(self):
+        self.dir: str = os.getenv('RWP_LOG_DIR', './')
+        self.level: str = os.getenv('RWP_LOG_LEVEL', 'INFO')
 
     def bootstrap(self):
 
