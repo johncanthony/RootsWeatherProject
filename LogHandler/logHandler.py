@@ -25,5 +25,5 @@ class LogHandler:
         handler.setFormatter(formatter)
         logger.addHandler(handler)
 
-        log.info(f'Logging DIR set to {os.getenv("RWP_LOG_DIR", "not set")}')
-        log.info(f'Logging to {self.dir}{self.service_name}-service.log')
+        log.info(f'[Log Bootstrap] Logging DIR set to {os.getenv("RWP_LOG_DIR", "not set")}')
+        log.info(f'[Log Bootstrap] Logging to {self.dir}{self.service_name}-service.log')
