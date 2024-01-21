@@ -76,7 +76,7 @@ def run():
 def launch():
 
     LogHandler(service_name='resolver').bootstrap()
-    log.info('Starting resolver service')
+    log.info('[BOOT] Starting resolver service')
 
     while True:
         sleep(5)
