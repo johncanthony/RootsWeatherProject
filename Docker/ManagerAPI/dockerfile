@@ -1,0 +1,21 @@
+from python:3.10.12-alpine
+
+WORKDIR /app
+RUN mkdir -p /log
+RUN mkdir -p /images
+RUN mkdir -p app/creds
+
+RUN pip install RootsWeatherProject
+
+COPY ./log.ini .
+COPY ./client_secrets.json creds/
+
+ENV MANAGERAPI_HOSTNAME=0.0.0.0
+ENV MANAGERAPI_PORT=8000
+ENV REDIS_HOST=localhost
+ENV CLIENT_SECRETS_FILE="/app/creds/client_secrets.json"
+ENV FLOW_BASE_URI=localhost
+
+EXPOSE 8000
+
+CMD ["managerAPI"]

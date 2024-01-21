@@ -1,0 +1,13 @@
+To obtain the client_secrets.json file, follow the instructions below:
+https://googleapis.github.io/google-api-python-client/docs/client-secrets.html
+
+FLOW_BASE_URL Format
+host.name (No following slash)
+
+REDIS_HOST Format
+redis.host.name (No following slash)
+
+Make sure the ENV PORT and ENV MANAGER_API_PORT are the same
+
+LOG.INI
+Make a copy of the ManagerAPI/log.ini file, edit it as needed, and place in the same directory where you will run the docker command
