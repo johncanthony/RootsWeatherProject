@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Request
 from fastapi.responses import RedirectResponse
-from ManagerAPI.api.managers.connection_manager import AuthManager
+from ManagerAPI.api.managers.connection_manager import AuthManager, RedisConnectionConfig
 import logging
 import google_auth_oauthlib.flow
 import os
@@ -60,7 +60,7 @@ async def auth_callback(request: Request):
     flow.fetch_token(authorization_response=authorization_response)
     credentials = flow.credentials
 
-    return AuthManager(refresh_token=credentials.refresh_token).store()
+    return AuthManager(refresh_token=credentials.refresh_token, RedisConnectionConfig=RedisConnectionConfig()).store()
 
 
 @authRouter.get("/refresh_token")
@@ -68,4 +68,4 @@ async def refresh_token():
 
     log.info('Refreshing token')
 
-    return AuthManager().fetch()
+    return AuthManager(RedisConnectionConfig=RedisConnectionConfig()).fetch()

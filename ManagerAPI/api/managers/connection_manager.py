@@ -13,7 +13,7 @@ class RedisConnectionConfig:
 @dataclass
 class AuthManager:
 
-    connection_config: RedisConnectionConfig = RedisConnectionConfig()
+    connection_config: RedisConnectionConfig = None
     refresh_token: str = ""
 
     def store(self):
