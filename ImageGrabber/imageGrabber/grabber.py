@@ -9,6 +9,8 @@ import requests
 import os
 import threading
 
+IMAGE_DIR = os.getenv("IMAGE_DESTINATION", "./images")
+
 '''
 Iterate over the image links and download the images to the attached longhorn volume at /images
 '''
@@ -18,7 +20,7 @@ def grab_images(job: ManagedJobModel, request_base_url: str, request_timeout: in
 
     log.info(f'Grabbing images for job: {job.job_id}')
 
-    IMAGE_DESTINATION = f'./images/{job.job_id}/'
+    IMAGE_DESTINATION = f'{IMAGE_DIR}/{job.job_id}/'
     if not os.path.exists(IMAGE_DESTINATION):
         os.makedirs(IMAGE_DESTINATION)
 

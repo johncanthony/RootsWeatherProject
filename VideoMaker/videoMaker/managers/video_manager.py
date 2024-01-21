@@ -3,6 +3,7 @@ import ffmpeg
 import os
 import logging as log
 
+IMAGE_DIR = os.getenv('IMAGE_DIR') or './images'
 
 @dataclass
 class VideoBase:
@@ -12,7 +13,7 @@ class VideoBase:
 
     @property
     def image_directory(self):
-        return f'./images/{self.video_name}'
+        return f'{IMAGE_DIR}/{self.video_name}'
 
     @property
     def output_file(self):
