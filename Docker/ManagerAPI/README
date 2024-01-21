@@ -2,7 +2,7 @@ To obtain the client_secrets.json file, follow the instructions below:
 https://googleapis.github.io/google-api-python-client/docs/client-secrets.html
 
 FLOW_BASE_URL Format
-host.name (No following slash)
+host.name:port_number (No following slash)
 
 REDIS_HOST Format
 redis.host.name (No following slash)

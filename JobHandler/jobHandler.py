@@ -4,12 +4,15 @@ from ManagerAPI.api.models.managedJob import ManagedJobModel
 from time import time
 import requests
 import logging as log
+import os
+
+BASE_JOB_HANDLER_URL = os.getenv('MANAGERAPI_BASE_URL', 'http://localhost:8000/')
 
 
 class JobHandler:
 
     stateManager = StateManager()
-    baseConnectionURL = "http://localhost:8000/"
+    baseConnectionURL = BASE_JOB_HANDLER_URL
 
     def __init__(self, job_queue: str):
         self.job_queue = job_queue
