@@ -14,8 +14,8 @@ setup(
         'Development Status :: 3 - Alpha',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
-        'Programming Language :: Python :: 3.10.12'
-        'Programming Language :: Python :: 3.12.1'
+        'Programming Language :: Python :: 3.10',
+        'Programming Language :: Python :: 3.12'
     ],
     entry_points={
         'console_scripts': [
