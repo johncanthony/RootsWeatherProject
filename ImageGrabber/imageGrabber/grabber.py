@@ -9,7 +9,6 @@ import requests
 import os
 import threading
 
-
 '''
 Iterate over the image links and download the images to the attached longhorn volume at /images
 '''
@@ -96,10 +95,16 @@ def run():
     return
 
 
-if __name__ == "__main__":
+def launch():
 
-    LogHandler(service_name="imageGrabber", dir='log/', level="INFO").bootstrap()
+    LogHandler(service_name="imageGrabber").bootstrap()
+    log.info('[BOOT] Starting image grabber')
 
     while True:
         sleep(5)
         run()
+
+
+if __name__ == "__main__":
+
+    launch()

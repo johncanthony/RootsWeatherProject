@@ -75,7 +75,7 @@ def run():
 
 if __name__ == "__main__":
 
-    LogHandler(service_name='resolver', dir="log/", level="DEBUG").bootstrap()
+    LogHandler(service_name='resolver').bootstrap()
     log.info('Starting resolver service')
 
     while True:

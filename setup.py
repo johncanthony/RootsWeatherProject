@@ -17,4 +17,9 @@ setup(
         'Programming Language :: Python :: 3.10.12'
         'Programming Language :: Python :: 3.12.1'
     ],
+    entry_points={
+        'console_scripts': [
+            'managerAPI = ManagerAPI.server:launch',
+        ]
+    }
 )

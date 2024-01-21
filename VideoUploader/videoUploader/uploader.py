@@ -93,7 +93,7 @@ def run():
 
 if __name__ == "__main__":
 
-    LogHandler(service_name="videoUploader", dir='log/', level="INFO").bootstrap()
+    LogHandler(service_name="videoUploader").bootstrap()
     log.info('[Boot] Starting video uploader')
 
     while True:

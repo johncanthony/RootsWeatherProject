@@ -11,6 +11,10 @@ class TestLogHandler(unittest.TestCase):
         log_handler = LogHandler(service_name='test', level='DEBUG')
         log_handler.bootstrap()
 
+        # Assert Default getenv() values are set
+        self.assertEqual(log_handler.service_name, 'test')
+        self.assertEqual(log_handler.dir, 'log/')
+
         # Assert the appropriate log level and log file name are set
         self.assertEqual(log.getLogger().level, log.DEBUG)
         testLogHandler = [handler.baseFilename for handler in log.getLogger().handlers if isinstance(handler, TimedRotatingFileHandler)]
