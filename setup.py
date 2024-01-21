@@ -19,7 +19,7 @@ setup(
     ],
     entry_points={
         'console_scripts': [
-            'managerAPI = ManagerAPI.server:launch'
+            'managerAPI = ManagerAPI.server:launch',
             'imageResolver = ImageResolver.imageResolver.resolver:launch',
             'imageGrabber = ImageGrabber.imageGrabber.grabber:launch',
             'videoMaker = VideoMaker.videoMaker.videomaker:launch',
