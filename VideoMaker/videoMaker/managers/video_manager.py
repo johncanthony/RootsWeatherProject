@@ -5,6 +5,7 @@ import logging as log
 
 IMAGE_DIR = os.getenv('IMAGE_DIR') or './images'
 
+
 @dataclass
 class VideoBase:
 
