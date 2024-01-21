@@ -3,7 +3,7 @@ from logging.handlers import TimedRotatingFileHandler
 from dataclasses import dataclass
 import os
 
-LOG_DIR = os.getenv('RWP_LOG_DIR') or 'log/'
+LOG_DIR = os.getenv('RWP_LOG_DIR') or './'
 LOG_LEVEL = os.getenv('RWP_LOG_LEVEL') or 'INFO'
 
 @dataclass

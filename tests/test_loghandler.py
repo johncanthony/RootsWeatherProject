@@ -13,7 +13,7 @@ class TestLogHandler(unittest.TestCase):
 
         # Assert Default getenv() values are set
         self.assertEqual(log_handler.service_name, 'test')
-        self.assertEqual(log_handler.dir, 'log/')
+        self.assertEqual(log_handler.dir, './')
 
         # Assert the appropriate log level and log file name are set
         self.assertEqual(log.getLogger().level, log.DEBUG)
