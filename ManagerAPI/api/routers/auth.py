@@ -60,7 +60,7 @@ async def auth_callback(request: Request):
     flow.fetch_token(authorization_response=authorization_response)
     credentials = flow.credentials
 
-    return AuthManager(refresh_token=credentials.refresh_token, RedisConnectionConfig=RedisConnectionConfig()).store()
+    return AuthManager(refresh_token=credentials.refresh_token, connection_config=RedisConnectionConfig()).store()
 
 
 @authRouter.get("/refresh_token")
@@ -68,4 +68,4 @@ async def refresh_token():
 
     log.info('Refreshing token')
 
-    return AuthManager(RedisConnectionConfig=RedisConnectionConfig()).fetch()
+    return AuthManager(connection_config=RedisConnectionConfig()).fetch()
