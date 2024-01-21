@@ -6,6 +6,7 @@ import os
 LOG_DIR = os.getenv('RWP_LOG_DIR') or './'
 LOG_LEVEL = os.getenv('RWP_LOG_LEVEL') or 'INFO'
 
+
 @dataclass
 class LogHandler:
 
