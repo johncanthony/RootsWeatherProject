@@ -1,0 +1,13 @@
+from python:3.10.12-alpine
+
+WORKDIR /
+RUN mkdir -p /log
+
+RUN pip install RootsWeatherProject==1.0.7
+
+ENV RWP_LOG_DIR=/log
+ENV RWP_LOG_LEVEL=DEBUG
+ENV MANAGERAPI_BASE_URL=http://localhost:8000
+
+
+CMD ["imageResolver"]

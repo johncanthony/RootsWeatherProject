@@ -20,10 +20,10 @@ class LogHandler:
         formatter = log.Formatter(
             '%(asctime)s [%(levelname)s] [%(module)s] %(message)s',
             '%b %d %H:%M:%S')
-        handler = TimedRotatingFileHandler(f'{self.dir}{self.service_name}-service.log', when='midnight', interval=1, backupCount=5)
+        handler = TimedRotatingFileHandler(f'{self.dir}/{self.service_name}-service.log', when='midnight', interval=1, backupCount=5)
 
         handler.setFormatter(formatter)
         logger.addHandler(handler)
 
         log.info(f'[Log Bootstrap] Logging DIR set to {os.getenv("RWP_LOG_DIR", "not set")}')
-        log.info(f'[Log Bootstrap] Logging to {self.dir}{self.service_name}-service.log')
+        log.info(f'[Log Bootstrap] Logging to {self.dir}/{self.service_name}-service.log')
