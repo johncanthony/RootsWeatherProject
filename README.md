@@ -23,7 +23,7 @@ The project can be installed using pip:
 $ pip install RootsWeatherProject
 ```
 
-## Example Architecture Implementation (Youtube)
+## Example Architecture (K3S)
 ![Architecture Diagram](docs/images/RWDArchitecture.png)
 
 
