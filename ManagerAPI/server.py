@@ -3,7 +3,7 @@ from ManagerAPI import managerAPI
 import os
 
 HOSTNAME = os.getenv('MANAGERAPI_HOSTNAME') or 'localhost'
-PORT = os.getenv('MANAGERAPI_PORT') or 8000
+PORT = int(os.getenv('MANAGERAPI_PORT')) or 8000
 
 
 def launch():
