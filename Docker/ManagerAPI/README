@@ -10,4 +10,4 @@ redis.host.name (No following slash)
 Make sure the ENV PORT and ENV MANAGER_API_PORT are the same
 
 LOG.INI
-Make a copy of the ManagerAPI/log.ini file, edit it as needed, and place in the same directory where you will run the docker command
+Make a copy of the ManagerAPI/log.ini_example file, edit it as needed, and place in the same directory where you will run the docker command
