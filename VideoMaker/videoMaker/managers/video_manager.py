@@ -50,7 +50,7 @@ class ShortsVideoManager(VideoBase):
     @property
     def audiofile(self):
         return os.getenv('RWP_AUDIOFILE') or "./audio/clip.mp3"
-    
+
     vcodec: str = "libx264"
     acodec: str = "aac"
     audio_bitrate: str = "192k"

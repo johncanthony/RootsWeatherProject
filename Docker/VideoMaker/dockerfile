@@ -1,4 +1,4 @@
-from python:3.10.12
+FROM python:3.10.12
 
 # Install ffmpeg as a package
 RUN apt-get update && apt-get install -y ffmpeg

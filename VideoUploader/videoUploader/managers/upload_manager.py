@@ -11,15 +11,23 @@ import logging as log
 
 @dataclass
 class YTAuthManager:
-    secrets_file: str = os.getenv("CLIENT_SECRETS_FILE", "client_secrets.json")
+
     client_id: str = ""
     client_secret: str = ""
     token_url: str = "https://oauth2.googleapis.com/token"
     access_token: str = ""
     refresh_token: str = ""
-    manager_url: str = os.getenv("MANAGER_URL", "http://localhost")
+
     youtube_api_service_name: str = "youtube"
     youtube_api_version: str = "v3"
+
+    @property
+    def secrets_file(self):
+        return os.getenv("CLIENT_SECRETS_FILE", "client_secrets.json")
+
+    @property
+    def manager_url(self):
+        return os.getenv("MANAGER_URL", "localhost:8000")
 
     def fetch_refresh_token(self):
 
