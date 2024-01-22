@@ -3,8 +3,6 @@ import ffmpeg
 import os
 import logging as log
 
-IMAGE_DIR = os.getenv('IMAGE_DIR') or './images'
-
 
 @dataclass
 class VideoBase:
@@ -12,9 +10,12 @@ class VideoBase:
     video_name: str = "output"
     video_bitrate: str = "5000k"
 
+    def __post_init__(self):
+        self.IMAGE_DIR = os.getenv('IMAGE_DIR') or './images'
+
     @property
     def image_directory(self):
-        return f'{IMAGE_DIR}/{self.video_name}'
+        return f'{self.IMAGE_DIR}/{self.video_name}'
 
     @property
     def output_file(self):
@@ -45,7 +46,11 @@ ffmpeg -framerate 15 -pattern_type glob -i "*_GOES16-*-GEOCOLOR-*.jpg" -i space_
 class ShortsVideoManager(VideoBase):
 
     framerate: int = 15
-    audiofile: str = "./audio/space_walk_short.mp3"
+
+    @property
+    def audiofile(self):
+        return os.getenv('RWP_AUDIOFILE') or "./audio/clip.mp3"
+    
     vcodec: str = "libx264"
     acodec: str = "aac"
     audio_bitrate: str = "192k"

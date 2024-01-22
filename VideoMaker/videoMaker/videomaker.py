@@ -27,6 +27,8 @@ def create_video(job: ManagedJobModel):
     job.job_status = "packed"
     job.video_urn = VideoBase(video_name=str(job.job_id)).output_file
 
+    log.debug(f'Video created :{job.video_urn}')
+
     return
 
 
@@ -59,7 +61,7 @@ def run():
 def launch():
 
     LogHandler(service_name="videoMaker").bootstrap()
-    log.info("Starting VideoMaker service")
+    log.info("[Boot] Starting VideoMaker service")
 
     while True:
         sleep(5)
