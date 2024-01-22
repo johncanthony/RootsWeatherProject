@@ -60,7 +60,9 @@ async def auth_callback(request: Request):
     flow.fetch_token(authorization_response=authorization_response)
     credentials = flow.credentials
 
-    return AuthManager(refresh_token=credentials.refresh_token, connection_config=RedisConnectionConfig()).store()
+    AuthManager(refresh_token=credentials.refresh_token, connection_config=RedisConnectionConfig()).store()
+
+    return RedirectResponse(url=f'https://{FLOW_BASE_URI}/')
 
 
 @authRouter.get("/refresh_token")
