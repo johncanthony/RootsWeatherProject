@@ -3,7 +3,7 @@
 ![Build Workflow](https://github.com/johncanthony/RootsWeatherProject/actions/workflows/python-package.yml/badge.svg) [![PyPI](https://badge.fury.io/py/RootsWeatherProject.svg)](https://badge.fury.io/py/RootsWeatherProject)
 
 
-`RootsWeatherProjectv2` is a Python package that contains pipeline microservices designed to create videos (h.264) from compiled NOAA GOES image data. 
+`RootsWeatherProjectv2` is a Python package that contains pipeline microservices designed to create and upload videos (h.264) from compiled NOAA GOES image data. 
 
 Project Youtube Link : [https://www.youtube.com/@rweather](https://www.youtube.com/@rWeather)
 
