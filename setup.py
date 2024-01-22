@@ -3,6 +3,8 @@ from setuptools import setup, find_packages
 setup(
     name='RootsWeatherProject',
     version='1.0.10',
+    long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
     packages=find_packages(),
     install_requires=['pytest', 'fastapi', 'pydantic', 'uvicorn', 'httpx', 'redis', 'requests',
                       'beautifulsoup4', 'bs4', 'setuptools', 'ffmpeg-python', 'google_auth_oauthlib',
