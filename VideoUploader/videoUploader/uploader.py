@@ -87,7 +87,7 @@ def run():
         return
 
     job.job_status = "uploaded"
-    job.time_end = int(time())
+    job.job_end_time = int(time())
     jobHandler.update_job(job)
 
 

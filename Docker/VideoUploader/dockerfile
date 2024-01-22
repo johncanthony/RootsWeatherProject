@@ -1,0 +1,21 @@
+FROM python:3.10.12-alpine
+
+WORKDIR /app
+RUN mkdir -p /log
+RUN mkdir -p /images
+RUN mkdir -p app/creds
+
+RUN pip install RootsWeatherProject==1.0.12
+
+COPY ./client_secrets.json creds/
+
+ENV CLIENT_SECRETS_FILE="/app/creds/client_secrets.json"
+
+ENV RWP_LOG_DIR=/log
+ENV RWP_LOG_LEVEL=DEBUG
+ENV MANAGERAPI_BASE_URL="localhost:8000/"
+ENV MANAGER_URL="localhost:8000"
+ENV IMAGE_DIR=/images
+
+
+CMD ["videoUploader"]

@@ -1,7 +1,7 @@
 To obtain the client_secrets.json file, follow the instructions below:
 https://googleapis.github.io/google-api-python-client/docs/client-secrets.html
 
-FLOW_BASE_URL Format
+FLOW_BASE_URL Format (This is specifc to the Google Authentication - different in case you want to use another HTTPS endpoint for that flow)
 host.name:port_number (No following slash)
 
 REDIS_HOST Format
