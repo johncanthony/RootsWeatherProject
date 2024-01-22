@@ -18,6 +18,7 @@ Iterate over the image links and download the images to the attached longhorn vo
 def grab_images(job: ManagedJobModel, request_base_url: str, request_timeout: int = 10, max_threads: int = 10):
 
     log.info(f'Grabbing images for job: {job.job_id}')
+    
     IMAGE_DIR = os.getenv("IMAGE_DESTINATION", "./images")
 
     IMAGE_DESTINATION = f'{IMAGE_DIR}/{job.job_id}/'
