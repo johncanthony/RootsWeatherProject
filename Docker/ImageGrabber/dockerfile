@@ -1,0 +1,15 @@
+from python:3.10.12-alpine
+
+WORKDIR /app
+RUN mkdir -p /log
+RUN mkdir -p /images
+
+
+RUN pip install RootsWeatherProject==1.0.11
+
+ENV RWP_LOG_DIR=/log
+ENV RWP_LOG_LEVEL=DEBUG
+ENV MANAGERAPI_BASE_URL="http://localhost:8000/"
+ENV IMAGE_DESTINATION=/images
+
+CMD ["imageGrabber"]
