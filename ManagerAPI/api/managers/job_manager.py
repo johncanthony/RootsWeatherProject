@@ -1,8 +1,8 @@
 from redis import StrictRedis, exceptions
 from ManagerAPI.api.models.managedJob import ManagedJobModel
 import logging
-import pathlib
 import shutil
+import os
 
 log = logging.getLogger('uvicorn')
 
@@ -103,9 +103,10 @@ class JobManager:
 
     def delete_job(self, job_id: str, force: bool = False):
 
-        job = self.get_job(job_id=job_id)
+        JOB_IMG_VID_DIR = os.getenv('IMAGE_VIDEO_DIR', '/tmp')
 
-        file_path = pathlib.Path(job.video_urn).parent
+        file_path = f'{JOB_IMG_VID_DIR}/{job_id}'
+        log.debug(f'Attempting to delete job {job_id} from {file_path}')
 
         if not force:
             if file_path.exists():

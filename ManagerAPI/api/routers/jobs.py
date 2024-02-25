@@ -101,4 +101,8 @@ async def get_job_video(job_id):
         log.error(f'Job {job_id} video not packed')
         raise HTTPException(status_code=404, detail='Video not created yet')
 
+    if not job.video_urn:
+        log.error(f'Job {job_id} video not found')
+        raise HTTPException(status_code=404, detail='Video is expected, but not found')
+
     return FileResponse(job.video_urn)

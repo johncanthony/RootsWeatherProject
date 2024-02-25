@@ -1,4 +1,4 @@
-from python:3.10.12-alpine
+FROM python:3.10.12-alpine
 
 WORKDIR /app
 RUN mkdir -p /log
@@ -15,6 +15,7 @@ ENV MANAGERAPI_PORT=8000
 ENV REDIS_HOST=localhost
 ENV CLIENT_SECRETS_FILE="/app/creds/client_secrets.json"
 ENV FLOW_BASE_URI=localhost
+ENV IMAGE_VIDEO_DIR=/images
 
 EXPOSE 8000
 
