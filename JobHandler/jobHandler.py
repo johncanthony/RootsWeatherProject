@@ -52,9 +52,12 @@ class JobHandler:
 
     def update_job(self, job):
 
+        log.debug(f'Attempting to update job {job.job_id} to {self.baseConnectionURL + "job"}')
+
         try:
             job_update = requests.post(self.baseConnectionURL + "job", json=job.model_dump())
         except requests.exceptions.ConnectionError:
+            log.error(f'[Job Handler] Failed to update job {job.job_id} to {self.baseConnectionURL + "job"}')
             return False
         except requests.exceptions.ReadTimeout:
             log.error(f'[Job Handler] Timeout updating job {job.job_id} to {self.baseConnectionURL + "job"}')
