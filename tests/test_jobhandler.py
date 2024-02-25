@@ -42,6 +42,7 @@ def test_fetch_job_fields(job_handler):
                 "video_urn": "",
                 "img_resolution": "1250x750",
                 "yt_video_id": "",
+                "publish_public": "False",
                 "region": "CONUS"
                 }
             }
@@ -71,6 +72,7 @@ def test_update_job(job_handler):
                 "video_urn": "",
                 "img_resolution": "1250x750",
                 "yt_video_id": "",
+                "publish_public": "False",
                 "region": "CONUS"
                 }
             }

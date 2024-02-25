@@ -26,6 +26,13 @@ def get_title(job: ManagedJobModel):
     return title_base
 
 
+def publish_privacy_status(job: ManagedJobModel):
+    if job.publish_public:
+        return "public"
+
+    return "private"
+
+
 def get_description():
     description = """24 Hour  Timelapse
 
@@ -46,7 +53,7 @@ def upload_video(job: ManagedJobModel):
     ytVideoManager = YTVideoManager(title=get_title(job=job),
                                     description=get_description(),
                                     video_type=get_video_type(job=job),
-                                    privacy_status="private",
+                                    privacy_status=publish_privacy_status(job=job),
                                     video_file=job.video_urn,
                                     auth_manager=ytAuthManager)
 
