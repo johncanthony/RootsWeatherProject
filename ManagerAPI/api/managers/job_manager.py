@@ -109,7 +109,7 @@ class JobManager:
         log.debug(f'Attempting to delete job {job_id} from {file_path}')
 
         if not force:
-            if file_path.exists():
+            if os.path.exists(file_path):
                 shutil.rmtree(file_path)
             else:
                 log.error(f'Job {job_id} data not found on disk')
