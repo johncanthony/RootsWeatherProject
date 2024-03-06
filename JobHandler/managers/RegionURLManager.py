@@ -10,6 +10,7 @@ class RegionURLManager:
     pac_west: str = "https://cdn.star.nesdis.noaa.gov/GOES18/ABI/SECTOR/wus/GEOCOLOR/"
     mexico: str = "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/mex/GEOCOLOR/"
     conus: str = "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/GEOCOLOR/"
+    conus_west: str = "https://cdn.star.nesdis.noaa.gov/GOES18/ABI/CONUS/GEOCOLOR/"
 
     def __getitem__(self, item):
         return getattr(self, item)

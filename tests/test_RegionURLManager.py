@@ -10,7 +10,8 @@ def test_getitem():
                  ("north_mississippi_valley", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/umv/GEOCOLOR/"),
                  ("pac_west", "https://cdn.star.nesdis.noaa.gov/GOES18/ABI/SECTOR/wus/GEOCOLOR/"),
                  ("mexico", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/mex/GEOCOLOR/"),
-                 ("conus", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/GEOCOLOR/")]
+                 ("conus", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/GEOCOLOR/"),
+                 ("conus_west", "https://cdn.star.nesdis.noaa.gov/GOES18/ABI/CONUS/GEOCOLOR/")]
 
     for region in regionMap:
         assert manager[region[0]] == region[1]
@@ -24,6 +25,7 @@ def test_valid_region():
                ("south_mississippi_valley", True),
                ("north_mississippi_valley", True),
                ("pac_west", True), ("conus", True),
+               ("mexico", True),("conus_west", True),
                ("invalid_region", False)]
 
     for region in regions:
