@@ -24,7 +24,7 @@ $ pip install RootsWeatherProject
 ```
 
 ## Example Architecture (K3S)
-![Architecture Diagram](docs/images/RWDArchitecture.png)
+![Architecture Diagram](https://raw.githubusercontent.com/johncanthony/RootsWeatherProject/main/docs/images/RWDArchitecture.png)
 
 
 
