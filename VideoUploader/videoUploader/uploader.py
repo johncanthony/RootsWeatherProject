@@ -34,7 +34,9 @@ def publish_privacy_status(job: ManagedJobModel):
 
 
 def get_description():
-    description = """24 Hour  Timelapse
+    description = """24 Hour  Timelapse 
+Donations Welcome:
+https://buymeacoffee.com/rootsweather
 
 Processed and uploaded by the RootsWeather Project
 
