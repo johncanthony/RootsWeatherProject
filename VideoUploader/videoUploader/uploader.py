@@ -18,7 +18,7 @@ def get_video_type(job: ManagedJobModel):
 
 def get_title(job: ManagedJobModel):
     title_base = f'GOES-East {job.img_date} {job.region.replace("_", " ").title()} - 24 Hour Timelapse'
-    title_base_shorts = f'{job.region.replace("_", " ").title()} GOES {job.img_date} #weather'
+    title_base_shorts = f'{job.region.replace("_", " ").title()} GOES Weather Timelapse {job.img_date} #weather'
 
     if get_video_type(job) == "shorts":
         return title_base_shorts
