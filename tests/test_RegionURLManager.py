@@ -35,7 +35,7 @@ def test_valid_region():
                ("gulf_of_mexico", True),
                ("great_lakes", True),
                ("northeast",True),
-               ("beryl",True)
+               ("beryl",True),
                ("invalid_region", False)]
 
     for region in regions:
