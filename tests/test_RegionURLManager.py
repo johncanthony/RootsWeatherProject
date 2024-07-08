@@ -15,7 +15,8 @@ def test_getitem():
                  ("southern_plains", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/sp/GEOCOLOR/"),
                  ("gulf_of_mexico", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/gm/GEOCOLOR/"),
                  ("great_lakes", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cgl/GEOCOLOR/"),
-                 ("northeast", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/ne/GEOCOLOR/")]
+                 ("northeast", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/ne/GEOCOLOR/"),
+                 ("beryl","https://cdn.star.nesdis.noaa.gov/FLOATER/AL022024/GEOCOLOR/")]
 
     for region in regionMap:
         assert manager[region[0]] == region[1]
@@ -34,6 +35,7 @@ def test_valid_region():
                ("gulf_of_mexico", True),
                ("great_lakes", True),
                ("northeast",True),
+               ("beryl",True)
                ("invalid_region", False)]
 
     for region in regions:

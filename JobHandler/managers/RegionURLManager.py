@@ -15,6 +15,8 @@ class RegionURLManager:
     gulf_of_mexico: str = "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/gm/GEOCOLOR/"
     great_lakes: str = "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cgl/GEOCOLOR/"
     northeast: str = "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/ne/GEOCOLOR/"
+    # Temp link for the hurricane
+    beryl: str = "https://cdn.star.nesdis.noaa.gov/FLOATER/AL022024/GEOCOLOR/"
 
     def __getitem__(self, item):
         return getattr(self, item)
