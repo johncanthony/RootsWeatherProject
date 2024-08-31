@@ -17,8 +17,8 @@ def get_video_type(job: ManagedJobModel):
 
 
 def get_title(job: ManagedJobModel):
-    title_base = f'GOES-East {job.img_date} {job.region.replace("_", " ").title()} - 24 Hour Timelapse'
-    title_base_shorts = f'{job.region.replace("_", " ").title()} GOES Weather Timelapse {job.img_date} #weather'
+    title_base = f'{job.region.replace("_", " ").upper()} {job.get_title_date()} - 24 Hour Timelapse'
+    title_base_shorts = f'{job.region.replace("_", " ").title()} {job.get_title_date()} Weather Timelapse #weathertoday'
 
     if get_video_type(job) == "shorts":
         return title_base_shorts
@@ -34,10 +34,8 @@ def publish_privacy_status(job: ManagedJobModel):
 
 
 def get_description():
-    description = """24 Hour  Timelapse 
- 
-Imagery credit to NOAA / NESDIS Center for Satellite Applications and Research.
-    """
+    
+    description = f' Timelapse of the {region.replace("_", " ").title()} weather for {new_date} \n Imagery credit to NOAA / NESDIS Center for Satellite Applications and Research.'
 
     return description
 

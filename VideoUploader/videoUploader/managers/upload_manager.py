@@ -99,7 +99,7 @@ class YTVideoManager:
     def upload_video(self, credentials):
 
         if self.video_type == "shorts":
-            self.description += " #Shorts"
+            self.description += "\n #Shorts"
 
         try:
             youtube = build(

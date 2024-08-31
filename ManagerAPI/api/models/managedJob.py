@@ -26,3 +26,7 @@ class ManagedJobModel(BaseModel):
     def get_formatted_date(self):
         date_str = self.img_date.split("-")
         return datetime(int(date_str[0]), int(date_str[1]), int(date_str[2])).strftime("%Y%j")
+
+    def get_title_date(self):
+        date_str = self.img_date.split("-")
+        return datetime(int(date_str[0]), int(date_str[1]), int(date_str[2])).strftime("%b %d %Y")
