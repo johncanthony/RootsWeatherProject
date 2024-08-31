@@ -33,7 +33,7 @@ def publish_privacy_status(job: ManagedJobModel):
     return "private"
 
 
-def get_description():
+def get_description(job: ManagedJobModel):
     
     description = f' Timelapse of the {job.region.replace("_", " ").title()} weather for {job.get_title_date} \n Imagery credit to NOAA / NESDIS Center for Satellite Applications and Research.'
 
@@ -45,7 +45,7 @@ def upload_video(job: ManagedJobModel):
 
     ytAuthManager = YTAuthManager().bootstrap()
     ytVideoManager = YTVideoManager(title=get_title(job=job),
-                                    description=get_description(),
+                                    description=get_description(job=job),
                                     video_type=get_video_type(job=job),
                                     privacy_status=publish_privacy_status(job=job),
                                     video_file=job.video_urn,
