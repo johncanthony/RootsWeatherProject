@@ -35,7 +35,7 @@ def publish_privacy_status(job: ManagedJobModel):
 
 def get_description():
     
-    description = f' Timelapse of the {region.replace("_", " ").title()} weather for {new_date} \n Imagery credit to NOAA / NESDIS Center for Satellite Applications and Research.'
+    description = f' Timelapse of the {job.region.replace("_", " ").title()} weather for {job.get_title_date} \n Imagery credit to NOAA / NESDIS Center for Satellite Applications and Research.'
 
     return description
 
