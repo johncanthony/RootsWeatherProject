@@ -11,7 +11,7 @@ origins = [
     "https://mac.memant.net"
 ]
 
-app.add_middleware(
+managerAPI.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
