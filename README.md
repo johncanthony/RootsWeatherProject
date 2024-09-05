@@ -23,10 +23,12 @@ The project can be installed using pip:
 $ pip install RootsWeatherProject
 ```
 
-## Example Architecture (K3S)
+## Example Architectures 
+### Local K3S on Raspberry PI
 ![Architecture Diagram](https://raw.githubusercontent.com/johncanthony/RootsWeatherProject/main/docs/images/RWDArchitecture.png)
 
-
+### Google Cloud Platform
+![Architecture Diagram](https://raw.githubusercontent.com/johncanthony/RootsWeatherProject/main/docs/images/RWP_Architecture-GCP.png)
 
 
 
