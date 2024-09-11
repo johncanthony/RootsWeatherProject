@@ -1,7 +1,7 @@
 from uuid import uuid4
 from datetime import datetime
 from time import time
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator, ValidationInfo
 from typing import Union, Optional
 
 
@@ -19,9 +19,21 @@ class ManagedJobModel(BaseModel):
     yt_video_id: Union[str, None] = ''
     publish_public: Union[str, None] = ''
     region: str
+    storm_id : Union[str,None] = ''
 
     class Config:
         orm_mode = True
+
+    #Custom model validation to ensure a storm_id is set if the storm region is set
+    @model_validator(mode='after')
+    def check_storm_id_present_if_storm_region_set(self):
+        region = self.region
+        storm_id = self.storm_id
+
+        if region == "storm" and not storm_id:
+            raise ValueError("Storm Region set, but no storm id provided")
+        
+        return self
 
     def get_formatted_date(self):
         date_str = self.img_date.split("-")

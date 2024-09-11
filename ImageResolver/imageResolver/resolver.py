@@ -56,7 +56,13 @@ def run():
         log.error(f'Failed to fetch job {new_job.job_id}')
         return
 
-    img_urls = fetch_NOAA_GOES_image_data(jobHandler=jobHandler, job=new_job, request_base_url=RegionURLManager()[new_job.region])
+    #storm_id needs to be inserted into the RegionURLManager url string if the region is set to storm
+    request_base_url = RegionURLManager()[new_job.region]
+    if new_job.region == "storm":
+        request_base_url = request_base_url.format(new_job.storm_id)
+        log.debug(f'Storm region set. Added storm_id : {new_job.storm_id}. Updated URL: {request_base_url}')
+
+    img_urls = fetch_NOAA_GOES_image_data(jobHandler=jobHandler, job=new_job, request_base_url=request_base_url)
     log.debug(f'Found {len(img_urls)} images for date: {new_job.img_date} and resolution: {new_job.img_resolution}')
 
     if len(img_urls) == 0:
