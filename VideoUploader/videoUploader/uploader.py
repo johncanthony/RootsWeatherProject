@@ -78,9 +78,14 @@ def run():
     if not job:
         log.info('No jobs available')
         return
-
-    log.info(f'Processing job: {job.job_id}')
-    upload_video(job=job)
+    
+    # Check to see if the job has a publish state set. If no state is set, we move the job to uploaded. 
+    # A new state needs to be created to handle jobs that are completed, but no meant to be uploaded.
+    if job.publish_public != '':
+         log.info(f'Processing job: {job.job_id}')
+         upload_video(job=job)
+    else:
+        log.info("No publish state provided, marking job completed")
 
     if job.job_status == "error":
         log.error(f'Job {job.job_id} failed')
