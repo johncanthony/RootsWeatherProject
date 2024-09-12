@@ -31,6 +31,7 @@ def grab_images(job: ManagedJobModel, request_base_url: str, request_timeout: in
 
         try:
             response = requests.get(url, timeout=request_timeout)
+            response.raise_for_status()
         except requests.exceptions.ConnectionError as err:
             log.error(f'[HTTP Connection] Unable to fetch image: [{job.job_id}] {image_name} - {err}')
             job.job_status = "error"
@@ -41,7 +42,12 @@ def grab_images(job: ManagedJobModel, request_base_url: str, request_timeout: in
             job.job_status = "error"
             job.job_error += f'Timed out fetching image: {image_name} - {err} ,'
             return
-
+        except requests.exceptions.HTTPError as err:
+            log.error(f'[HTTP Response] Request failed with status code {response.status_code} - [{job.job_id} {image_name} - {url}]')
+            job.job_status = "error"
+            job.job_error += f'HTTP Error while fetching image: {image_name} - {err} ,'
+            return
+        
         with open(filename, 'wb') as f:
             f.write(response.content)
 

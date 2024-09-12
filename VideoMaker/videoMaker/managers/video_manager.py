@@ -70,7 +70,7 @@ class ShortsVideoManager(VideoBase):
                     audio_bitrate=self.audio_bitrate,
                     video_bitrate=self.video_bitrate,
                     shortest=None)
-            .run()
+            .run(overwrite_output=True)
         )
 
 
@@ -93,5 +93,5 @@ class VideoManager(VideoBase):
             .input(self.input_glob, pattern_type='glob', framerate=self.framerate)
             .filter("scale", 1920, 1080)
             .output(self.output_file, vcodec=self.vcodec, video_bitrate=self.video_bitrate)
-            .run()
+            .run(overwrite_output=True)
         )

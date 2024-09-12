@@ -16,7 +16,7 @@ class RegionURLManager:
     great_lakes: str = "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cgl/GEOCOLOR/"
     northeast: str = "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/ne/GEOCOLOR/"
     #Link Template for hurricanes/tropical storms
-    # $id is replaced by the STORM ID (example : stormid=AL062024)
+    # {} is replaced by the STORM ID (example : stormid=AL062024)
     storm: str = "https://cdn.star.nesdis.noaa.gov/FLOATER/{}/GEOCOLOR/"
 
     def __getitem__(self, item):
