@@ -91,10 +91,12 @@ def run():
         return
 
     request_base_url = regionalURLManager[new_job.region]
+    
     if new_job.region == "storm":
         request_base_url = request_base_url.format(new_job.storm_id)
         log.debug(f'Storm region set. Added storm_id : {new_job.storm_id}. Updated URL: {request_base_url}')
-    grab_images(job=new_job, request_base_url=regionalURLManager[new_job.region])
+
+    grab_images(job=new_job, request_base_url=request_base_url)
 
     if new_job.job_status == "error":
         jobHandler.update_job(new_job)
