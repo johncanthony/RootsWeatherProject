@@ -34,8 +34,11 @@ def fetch_NOAA_GOES_image_data(jobHandler: JobHandler, job: ManagedJobModel, req
     soup = BeautifulSoup(raw_data.content, 'html.parser')
     links = soup.find_all("a")
 
-    matched_img_links = [img_link.get("href") for img_link in links if job.get_formatted_date() in img_link.get("href") and
-                         job.img_resolution in img_link.get("href") and "jpg" in img_link.get("href")]
+    # If the date field has been supplied with a comma separated list of dates, this allows us to iterate over each date to get applicable links
+    for date in job.img_date.split(','):
+        matched_img_links_date = [img_link.get("href") for img_link in links if job.get_formatted_date(date) in img_link.get("href") and
+                                  job.img_resolution in img_link.get("href") and "jpg" in img_link.get("href")]
+        matched_img_links = matched_img_links+ matched_img_links_date
 
     return matched_img_links
 

@@ -11,6 +11,8 @@ class ManagedJobModel(BaseModel):
     job_start_time: Optional[int] = Field(default_factory=lambda: int(time()))
     job_end_time: Union[int, None] = -1
     job_error: Union[str, None] = ''
+    #The img_date can be either a single date or comma separated list of dates
+    # TODO - Create date validation to match (YEAR-MO-DA)
     img_date: str
     image_links: Union[str, None] = ''
     gif_urn: Union[str, None] = ''
@@ -35,8 +37,8 @@ class ManagedJobModel(BaseModel):
         
         return self
 
-    def get_formatted_date(self):
-        date_str = self.img_date.split("-")
+    def get_formatted_date(self, date):
+        date_str = date.split("-")
         return datetime(int(date_str[0]), int(date_str[1]), int(date_str[2])).strftime("%Y%j")
 
     def get_title_date(self):
