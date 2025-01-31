@@ -43,7 +43,7 @@ jobs:
     - name: Store distribution artifacts
       uses: actions/upload-artifact@v4
       with:
-        name: python-package-distributions
+        name: dist-${{ matrix.python-version }}
         path: dist/
 
   pypi-publish:
