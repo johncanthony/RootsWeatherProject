@@ -29,6 +29,13 @@ def grab_images(job: ManagedJobModel, request_base_url: str, request_timeout: in
         url = request_base_url + image_name
         filename = IMAGE_DESTINATION + image_name
 
+        #For retries, we should not pull every image again.
+        # Check if the image exists on disk and exit if it does
+        # This is potentially a time expensive procedure, an alternative
+        # would be to have a second field in the job object to 
+        if os.path.exists(filename):
+            return
+
         try:
             response = requests.get(url, timeout=request_timeout)
             response.raise_for_status()

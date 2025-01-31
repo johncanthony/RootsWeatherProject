@@ -22,6 +22,7 @@ class ManagedJobModel(BaseModel):
     publish_public: Union[str, None] = ''
     region: str
     storm_id : Union[str,None] = ''
+    retries : Union[str,None] = '0'
 
     class Config:
         orm_mode = True
