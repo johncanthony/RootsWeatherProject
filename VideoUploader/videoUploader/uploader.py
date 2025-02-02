@@ -89,7 +89,7 @@ def run():
 
     if job.job_status == "error":
         log.error(f'Job {job.job_id} failed')
-        jobHandler.error_job(job, "Job failed")
+        jobHandler.error_job(job, job.job_error)
         return
 
     job.job_status = "uploaded"
