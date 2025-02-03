@@ -49,6 +49,7 @@ def run():
     create_video(new_job)
 
     if new_job.job_status == "error":
+        new_job.job_status = "grabbed"
         jobHandler.error_job(new_job,new_job.job_error)
         log.error(f'Updated job {new_job.job_id} with error')
         return

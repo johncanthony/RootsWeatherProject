@@ -106,6 +106,7 @@ def run():
     grab_images(job=new_job, request_base_url=request_base_url)
 
     if new_job.job_status == "error":
+        new_job.job_status="imgresolved"
         jobHandler.error_job(new_job,new_job.job_error)
         log.error(f'Updated job {new_job.job_id} with error')
         return

@@ -88,6 +88,7 @@ def run():
         log.info("No publish state provided, marking job completed")
 
     if job.job_status == "error":
+        job.job_status = "packed"
         log.error(f'Job {job.job_id} failed')
         jobHandler.error_job(job, job.job_error)
         return
