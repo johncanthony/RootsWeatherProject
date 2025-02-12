@@ -13,7 +13,7 @@ def test_getitem():
                  ("conus", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/CONUS/GEOCOLOR/"),
                  ("conus_west", "https://cdn.star.nesdis.noaa.gov/GOES18/ABI/CONUS/GEOCOLOR/"),
                  ("southern_plains", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/sp/GEOCOLOR/"),
-                 ("gulf_of_mexico", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/gm/GEOCOLOR/"),
+                 ("gulf_of_america", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/gm/GEOCOLOR/"),
                  ("great_lakes", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/cgl/GEOCOLOR/"),
                  ("northeast", "https://cdn.star.nesdis.noaa.gov/GOES16/ABI/SECTOR/ne/GEOCOLOR/"),
                  ("storm","https://cdn.star.nesdis.noaa.gov/FLOATER/{}/GEOCOLOR/")]
@@ -32,7 +32,7 @@ def test_valid_region():
                ("pac_west", True), ("conus", True),
                ("mexico", True),("conus_west", True),
                ("southern_plains", True),
-               ("gulf_of_mexico", True),
+               ("gulf_of_america", True),
                ("great_lakes", True),
                ("northeast",True),
                ("storm",True),
