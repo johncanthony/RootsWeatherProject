@@ -13,7 +13,7 @@ def test_getitem():
                  ("conus", "https://cdn.star.nesdis.noaa.gov/GOES19/ABI/CONUS/GEOCOLOR/"),
                  ("conus_west", "https://cdn.star.nesdis.noaa.gov/GOES18/ABI/CONUS/GEOCOLOR/"),
                  ("southern_plains", "https://cdn.star.nesdis.noaa.gov/GOES19/ABI/SECTOR/sp/GEOCOLOR/"),
-                 ("gulf_of_america", "https://cdn.star.nesdis.noaa.gov/GOES19/ABI/SECTOR/gm/GEOCOLOR/"),
+                 ("gulf_of_america", "https://cdn.star.nesdis.noaa.gov/GOES19/ABI/SECTOR/ga/GEOCOLOR/"),
                  ("great_lakes", "https://cdn.star.nesdis.noaa.gov/GOES19/ABI/SECTOR/cgl/GEOCOLOR/"),
                  ("northeast", "https://cdn.star.nesdis.noaa.gov/GOES19/ABI/SECTOR/ne/GEOCOLOR/"),
                  ("storm","https://cdn.star.nesdis.noaa.gov/FLOATER/{}/GEOCOLOR/")]
